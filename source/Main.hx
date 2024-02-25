@@ -106,6 +106,18 @@ class Main extends Sprite {
 	}
 
 	public function new() {
+		SUtil.uncaughtErrorHandler();
+		SUtil.saveContent("your file name", ".txt", "lololol");
+		#if mobileC
+		var justTouched:Bool = false;
+
+		for (touch in FlxG.touches.list)
+			if (touch.justPressed)
+				justTouched = true;
+
+		if (justTouched)
+		//Your code
+		#end
 		super();
 		#if windows //DPI AWARENESS BABY
 		@:functionCode('
@@ -144,6 +156,7 @@ class Main extends Sprite {
 
 		ClientPrefs.loadDefaultKeys();
 
+		SUtil.checkFiles();
 		addChild(new FlxGame(game.width, game.height, game.initialState, #if (flixel < "5.0.0") game.zoom, #end game.framerate, game.framerate, game.skipSplash, game.startFullscreen));
 
 		fpsVar = new FPS(10, 3, 0xFFFFFF);
